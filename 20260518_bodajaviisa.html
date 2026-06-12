@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Isabel & Javier</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- TIPOGRAFÍAS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 75px;
+}
+
+body { 
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(169,123,125);
+    background-color: #ffffff;
+}
+
+/* MENÚ */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;   /* CENTRA HORIZONTALMENTE */
+    align-items: center;       /* CENTRA VERTICALMENTE */
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin: 0;
+    padding: 0;
+}
+
+
+nav ul li a {
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: rgb(169,123,125);
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 75px;        /* ALTURA FIJA REAL */
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+/* SECCIONES */
+section {
+    min-height: 100vh;
+    padding: 75px 12% 50px 12%;
+    box-sizing: border-box;
+}
+
+/* TÍTULOS */
+
+h1 {
+	font-family: 'Playfair Display', serif; font-size: 64px; font-weight: 400; margin-top: 0; margin-bottom: 30px; 
+	}
+h2 { 
+	font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 400; text-align: center; margin-top: 0; margin-bottom: 60px; 
+	}
+
+/* TEXTO GENERAL */
+p {
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+
+
+/* INICIO */
+#inicio {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+}
+
+/* TEXTO IZQUIERDA */
+.inicio-texto {
+    width: 50%;
+}
+
+.inicio-texto p {
+    font-size: 18px;
+}
+
+.btn-confirmar {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 14px 36px;
+    border: 1px solid rgb(169,123,125);
+    color: rgb(169,123,125);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-confirmar:hover {
+    background: rgb(169,123,125);
+    color: #ffffff;
+}
+
+/* IMAGEN DERECHA */
+.inicio-imagen {
+    width: 70%;
+}
+
+.inicio-imagen img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+/* HORARIOS */
+
+#horarios {
+    position: relative;       /* necesario para que ::before se posicione relativo a la sección */
+    background-color: #f6f5f3;
+    overflow: hidden;         /* evita que la pseudo-imagen se desborde */
+}
+
+#horarios::before {
+    content: "";
+    position: absolute;
+    inset: 0;                 /* top:0; right:0; bottom:0; left:0 */
+    background-image: url("textura_tela.jpg");
+    background-repeat: repeat; /* textura tipo tela */
+    background-size: auto;     /* o cover si quieres que ocupe toda la sección */
+    opacity: 0.03;             /* ajusta según el efecto que quieras */
+    pointer-events: none;      /* para que no bloquee clicks o selección */
+    z-index: 0;                /* detrás de todo el contenido */
+}
+
+/* Asegura que el contenido quede por encima de la textura */
+#horarios > * {
+    position: relative;
+    z-index: 1;
+}
+
+.horarios-container {
+    display: flex;
+    gap: 70px;
+    align-items: center;
+}
+
+.horarios-fotos {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -120px;
+}
+
+.horarios-fotos img {
+    width: 270px;
+    height: auto;
+    margin-bottom: 25px;
+}
+
+.horarios-fotos img.tenadas {
+    width: 270px;
+    height: auto;
+    margin-top: 25px;
+}
+
+.horarios-separador {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;   /* clave */
+    align-self: flex-start;    /* clave */
+}
+
+.horarios-separador svg {
+    margin-top: 4px;
+    max-height: 100%;
+    width: auto;
+}
+
+.horarios-texto {
+    width: 45%;
+}
+
+.horarios-texto p {
+    margin-bottom: 105px;
+    text-indent: 2em;
+    font-size: 15px;
+}
+
+.horarios-texto strong {
+    font-weight: 500;
+}
+
+/* CONFIRMACIÓN */
+
+#confirmacion p {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#confirmacion p.p2 {
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 0 0 4px 0;
+    text-align: left;
+}
+
+#campos-extra {
+    display: none;
+}
+
+#dieta2-ocultar {
+    display: none;
+}
+
+#eleccion-plato-ocultar {
+    display: none;
+}   
+
+form {
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* espacio entre label, p2 y select */
+    margin-bottom: 12px; /* espacio entre grupos de campos */
+}
+
+input, select {
+    padding: 14px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(169,123,125);
+}
+
+button {
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    background: rgb(169,123,125);
+    color: #ffffff;
+    letter-spacing: 2px;
+    cursor: pointer;
+}
+
+/* REGALO */
+#regalo {
+    position: relative;       /* necesario para que ::before se posicione relativo a la sección */
+    background-color: #f6f5f3;
+    overflow: hidden;         /* evita que la pseudo-imagen se desborde */
+}
+
+#regalo::before {
+    content: "";
+    position: absolute;
+    inset: 0;                 /* top:0; right:0; bottom:0; left:0 */
+    background-image: url("textura_tela.jpg");
+    background-repeat: repeat; /* textura tipo tela */
+    background-size: auto;     /* o cover si quieres que ocupe toda la sección */
+    opacity: 0.03;             /* ajusta según el efecto que quieras */
+    pointer-events: none;      /* para que no bloquee clicks o selección */
+    z-index: 0;                /* detrás de todo el contenido */
+}
+
+/* Asegura que el contenido quede por encima de la textura */
+#regalo > * {
+    position: relative;
+    z-index: 1;
+}
+
+.regalo {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.regalo p {
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
+.regalo strong {
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    #inicio,
+    .horarios-container {
+        flex-direction: column;
+    }
+
+    .inicio-texto,
+    .inicio-imagen,
+    .horarios-fotos,
+    .horarios-texto {
+        width: 100%;
+    }
+
+    section {
+        height: 100vh;
+        padding: 75px 8% 50px 8%;
+    }
+}
+</style>
+</head>
+
+
+
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#inicio">INICIO</a></li>
+        <li><a href="#horarios">HORARIOS</a></li>
+        <li><a href="#confirmacion">CONFIRMACIÓN</a></li>
+        <li><a href="#regalo">REGALO</a></li>
+    </ul>
+</nav>
+
+
+<!-- INICIO -->
+<section id="inicio">
+    <div class="inicio-texto">
+        <h1>Isabel & Javier</h1>
+        <p>Viernes, 2 de octubre de 2026</p>
+        <p>Iglesia Nuestra Señora de Guadalupe</p>
+
+        <a href="#confirmacion" class="btn-confirmar">CONFIRMAR</a>
+
+    </div>
+
+    <div class="inicio-imagen">
+<!--  IMAGEN CAPITEL      <img src="capitel.png" alt="Capitel"> -->
+  	<img src="Madrid-Granada.png" alt="MadridGranada">
+    </div>
+</section>
+
+<!-- HORARIOS -->
+<section id="horarios">
+    <h2>Horarios</h2>
+
+    <div class="horarios-container">
+        <div class="horarios-fotos">
+            <img src="Guadalupe.png" alt="guadalupe">
+	    <img src="Tenadas.png" alt="las tenadas" class="tenadas">
+        </div>
+
+        <div class="horarios-separador">
+<svg
+  width="40"
+  height="496"
+  viewBox="0 0 40 496"
+  xmlns="http://www.w3.org/2000/svg">
+
+<!-- Circunferencia 1 -->
+<circle cx="20" cy="8" r="8"
+        stroke="#A97B7D" stroke-width="0.8" fill="none"/>
+
+<!-- Línea 1 -->
+<line x1="20" y1="16" x2="20" y2="150"
+      stroke="#A97B7D" stroke-width="0.8"/>
+
+<!-- Circunferencia 2 -->
+<circle cx="20" cy="158" r="8"
+        stroke="#A97B7D" stroke-width="0.8" fill="none"/>
+
+<!-- Línea 2 -->
+<line x1="20" y1="166" x2="20" y2="300"
+      stroke="#A97B7D" stroke-width="0.8"/>
+
+<!-- Circunferencia 3 -->
+<circle cx="20" cy="308" r="8"
+        stroke="#A97B7D" stroke-width="0.8" fill="none"/>
+
+<!-- Línea 3 -->
+<line x1="20" y1="316" x2="20" y2="450"
+      stroke="#A97B7D" stroke-width="0.8"/>
+
+<!-- Circunferencia 4 -->
+<circle cx="20" cy="458" r="8"
+        stroke="#A97B7D" stroke-width="0.8" fill="none"/>
+
+
+</svg>
+
+        </div>
+
+        <div class="horarios-texto">
+            <strong>01. Ceremonia · 18:00h</strong><br>
+		<p>Iglesia Nuestra Señora de Guadalupe</p>
+            <strong>02. Autobús · 19:30h</strong><br>
+		<p>Plaza Virgen Guadalupana</p>
+            <strong>03. Celebración · 20:00h</strong><br>
+		<p>Finca Las Tenadas</p>
+            <strong>04. Autobús vuelta · 04:00h</strong><br>
+		<p>Intercambiador Avda. América</p>
+        </div>
+    </div>
+</section>
+
+<!-- CONFIRMACIÓN -->
+<section id="confirmacion">
+    <h2>Confirmación</h2>
+
+<div id="bloque-confirmacion-ocultar-form">
+    <p>
+        Nos encantaría que pudieses acompañarnos en este día.<br>
+        Por favor, completa un formulario por persona.
+    </p>
+
+    <form id="formulario" action="https://script.google.com/macros/s/AKfycby6--r7sTLVKCN3uREa2ysOJQjtsxNCF9D338f4bFi8V5TzAQa1jkvlitruDYK2F_jHEA/exec" method="POST">
+
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="text" name="apellidos" placeholder="Apellidos" required>
+
+	<label for="asistencia">
+	  ¿Asistirás?
+	</label>
+        <select name="asistencia" id="asistencia" required>
+            <option></option>
+            <option>Sí</option>
+            <option>No</option>
+        </select>
+
+   <div id="campos-extra">
+	<label for="dieta1">
+	  ¿Tienes alguna alergia o necesidad alimentaria?
+  	<span title="Alergias, dieta vegetariana/vegana o embarazo.">ⓘ</span>
+	</label>
+        <select name="dieta1" id="dieta1" >
+            <option></option>
+            <option>Sí</option>
+            <option>No</option>
+        </select>
+    
+    <div id="dieta2-ocultar">
+	<label for="dieta2">
+	  Alergias o necesidades alimentarias
+  	<span title="Indícanos alergias, dieta vegetariana/vegana o embarazo.">ⓘ</span>
+	</label>
+	<input type="text" id="dieta2" name="dieta2">
+    </div>
+
+	<label for="bus_ida">
+	  ¿Utilizarás el autobús de ida a la finca?
+	</label>
+        <select name="bus_ida" id="bus_ida" >
+            <option>Sí</option>
+            <option>No</option>
+        </select>
+
+
+	<div class="form-group">
+  		<label for="bus_vuelta">
+   		¿Utilizarás el autobús de vuelta de la finca?
+ 		</label>
+  		<p class="p2">
+  		Saldrá a las 04:00 y hará una única parada en Avda. de América
+		</p>
+       			<select name="bus_vuelta" id="bus_vuelta" >
+            		<option>Sí</option>
+            		<option>No</option>
+        </select>	
+		<br>
+		<p style="text-align: justify; margin-bottom: 0;">
+		No preguntamos si vienen niños porque, para esta noche, os damos permiso oficial para buscar canguro y venir a darlo todo!   
+		</p>
+	</div>
+	
+   </div>
+        <button type="submit">ENVIAR RESPUESTA</button>
+    </form>
+
+</div>
+
+    <div id="mensaje-confirmacion" style="display:none; text-align:center; margin-top:20px; font-weight:bold; color:rgb(169,123,125);"></div>
+
+</section>
+
+<!-- REGALO -->
+<section id="regalo">
+    <h2>Regalo</h2>
+    <div class="regalo">
+        <p>
+            El mayor regalo que nos puedes hacer para este día es que nos acompañes, pero si además
+            deseas ayudarnos en esta nueva etapa, puedes hacerlo aquí.
+        </p>
+        <p>ES22 0081 2718 8900 0812 9024</p>
+    </div>
+</section>
+
+
+<!------------------------------INICIO CÓDIGO------------------------------->
+
+<script>
+const asistencia = document.getElementById("asistencia");
+const extra = document.getElementById("campos-extra");
+const dieta1 = document.getElementById("dieta1");
+const dieta2 = document.getElementById("dieta2-ocultar");
+const form = document.getElementById("formulario");
+const mensajeConfirmacion = document.getElementById("mensaje-confirmacion");
+
+// Mostrar/ocultar campos extra
+asistencia.addEventListener("change", function() {
+    if (this.value === "Sí") {
+        extra.style.display = "flex";
+        extra.style.flexDirection = "column";
+        extra.style.gap = "18px";
+    } else {
+        extra.style.display = "none";
+    }
+});
+
+dieta1.addEventListener("change", function() {
+    if (this.value === "Sí") {
+	dieta2.style.display = "flex";
+        dieta2.style.flexDirection = "column";
+        dieta2.style.gap = "18px";
+    } else {
+        dieta2.style.display = "none";
+    }
+});
+
+
+// Enviar formulario sin recargar la página
+form.addEventListener("submit", function(e) {
+    e.preventDefault(); // evita recargar
+
+    const formData = new FormData(form);
+
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text()) // usamos text() primero
+    .then(text => {
+        let data;
+        try {
+            data = JSON.parse(text); // parseamos manualmente
+        } catch(err) {
+            throw new Error("Respuesta no válida del servidor");
+        }
+        mensajeConfirmacion.textContent = data.result;
+        mensajeConfirmacion.style.display = "block";
+	document.getElementById("bloque-confirmacion-ocultar-form").style.display = "none";
+		document.getElementById("confirmacion").scrollIntoView({
+   			behavior: "smooth",
+    			block: "start"
+		});
+    })
+    .catch(error => {
+        mensajeConfirmacion.textContent = "Error al enviar el formulario. Intenta de nuevo.";
+        mensajeConfirmacion.style.display = "block";
+        console.error(error);
+    });
+});
+</script>
+
+<!------------------------------FIN CÓDIGO------------------------------->
+
+</body>
+</html>
