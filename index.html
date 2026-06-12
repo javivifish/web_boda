@@ -321,23 +321,100 @@ button {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    #inicio,
-    .horarios-container {
-        flex-direction: column;
+
+    /* Evita layouts rígidos */
+    section {
+        min-height: auto;
+        padding: 90px 20px 60px 20px;
     }
 
-    .inicio-texto,
-    .inicio-imagen,
-    .horarios-fotos,
+    /* ===== NAV ===== */
+    nav ul {
+        gap: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav ul li a {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    /* ===== INICIO ===== */
+    #inicio {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+
+    .inicio-texto {
+        width: 100%;
+    }
+
+    .inicio-imagen {
+        width: 100%;
+    }
+
+    .inicio-imagen img {
+        width: 100%;
+        height: auto;   /* CLAVE */
+        max-height: 60vh;
+        object-fit: cover;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    h2 {
+        font-size: 28px;
+        margin-bottom: 30px;
+    }
+
+    /* ===== HORARIOS ===== */
+    .horarios-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .horarios-fotos {
+        width: 100%;
+        margin-top: 0; /* elimina el hack */
+    }
+
+    .horarios-fotos img {
+        width: 70%;
+        max-width: 260px;
+    }
+
+    .horarios-separador {
+        display: none; /* en móvil no aporta valor */
+    }
+
     .horarios-texto {
         width: 100%;
     }
 
-    section {
-        height: 100vh;
-        padding: 75px 8% 50px 8%;
+    .horarios-texto p {
+        margin-bottom: 30px;
+    }
+
+    /* ===== FORMULARIO ===== */
+    form {
+        width: 100%;
+        padding: 0;
+    }
+
+    input, select, button {
+        font-size: 16px; /* evita zoom en iOS */
+    }
+
+    /* ===== REGALO ===== */
+    .regalo {
+        padding: 0 10px;
     }
 }
+
 </style>
 </head>
 
