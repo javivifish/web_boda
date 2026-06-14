@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Isabel & Javier</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET ===== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 60px;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(169,123,125);
+    background: #ffffff;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* ===== VARIABLES ===== */
+:root {
+    --rosa: rgb(169,123,125);
+    --fondo-alt: #f6f5f3;
+    --nav-h: 60px;
+    --pad-h: clamp(20px, 8vw, 120px);
+    --pad-v: clamp(50px, 8vh, 90px);
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: var(--nav-h);
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 16px;
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: clamp(16px, 4vw, 50px);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+nav ul li a {
+    text-decoration: none;
+    font-size: clamp(10px, 2.2vw, 13px);
+    letter-spacing: clamp(1px, 0.4vw, 2px);
+    color: var(--rosa);
+    white-space: nowrap;
+}
+
+/* ===== SECCIONES BASE ===== */
+section {
+    padding-top: calc(var(--nav-h) + var(--pad-v));
+    padding-bottom: var(--pad-v);
+    padding-left: var(--pad-h);
+    padding-right: var(--pad-h);
+}
+
+/* ===== TIPOGRAFÍA ===== */
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 7vw, 64px);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 24px;
+}
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 5vw, 42px);
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: clamp(32px, 6vh, 60px);
+}
+p {
+    font-size: clamp(14px, 2vw, 16px);
+    line-height: 1.8;
+}
+
+/* ===== INICIO ===== */
+#inicio {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(30px, 5vw, 80px);
+    min-height: 100vh;
+    padding-top: var(--nav-h); /* la imagen cubre full desde arriba */
+}
+.inicio-texto {
+    padding-top: var(--pad-v);
+    padding-bottom: var(--pad-v);
+}
+.inicio-texto p {
+    font-size: clamp(14px, 2vw, 18px);
+    margin-bottom: 8px;
+}
+.btn-confirmar {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 13px 32px;
+    border: 1px solid var(--rosa);
+    color: var(--rosa);
+    text-decoration: none;
+    font-size: clamp(11px, 1.6vw, 13px);
+    letter-spacing: 2px;
+    transition: background 0.3s, color 0.3s;
+}
+.btn-confirmar:hover {
+    background: var(--rosa);
+    color: #ffffff;
+}
+.inicio-imagen {
+    /* ocupa toda la altura visible */
+    align-self: stretch;
+}
+.inicio-imagen img {
+    width: 100%;
+    height: 100%;
+    min-height: 50vh;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===== HORARIOS ===== */
+#horarios {
+    position: relative;
+    background-color: var(--fondo-alt);
+    overflow: hidden;
+}
+#horarios::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("textura_tela.jpg");
+    background-repeat: repeat;
+    background-size: auto;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+}
+#horarios > * { position: relative; z-index: 1; }
+
+.horarios-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(24px, 4vw, 70px);
+    align-items: start;
+}
+.horarios-fotos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+.horarios-fotos img {
+    width: min(270px, 80%);
+    height: auto;
+    display: block;
+}
+.horarios-separador {
+    display: none;
+}
+.horarios-texto {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-left: 36px;  /* room for circle + line */
+    position: relative;
+}
+.horario-item {
+    margin-bottom: clamp(28px, 5vh, 80px);
+    position: relative;
+}
+.horario-item:last-child {
+    margin-bottom: 0;
+}
+/* Circle aligned with the title's cap-height */
+.horario-item::before {
+    content: "";
+    position: absolute;
+    left: -29px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 0.8px solid #A97B7D;
+    background: var(--fondo-alt);
+    box-sizing: border-box;
+}
+/* Line from bottom of this circle to top of next circle.
+   Circle: top=4px, height=14px → bottom at 18px.
+   Next circle top=4px → line bottom = -(margin-bottom - 4px).
+   margin-bottom uses clamp(28,5vh,80); we use a CSS var trick:
+   We extend slightly past the gap so it always meets the next circle. */
+.horario-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: -22.6px;
+    top: 18px;           /* bottom of this circle */
+    bottom: calc(-1 * clamp(28px, 5vh, 80px) + 4px); /* top of next circle */
+    width: 0.8px;
+    background: #A97B7D;
+}
+.horario-item strong {
+    font-weight: 500;
+    font-size: clamp(13px, 1.8vw, 15px);
+    display: block;
+    margin-bottom: 6px;
+}
+.horario-item p {
+    text-indent: 2em;
+    font-size: clamp(13px, 1.8vw, 15px);
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* ===== CONFIRMACIÓN ===== */
+#confirmacion p {
+    text-align: center;
+    margin-bottom: 40px;
+}
+#confirmacion p.p2 {
+    font-size: 12px;
+    line-height: 1.8;
+    margin: 0 0 6px 0;
+    text-align: left;
+}
+#campos-extra { display: none; }
+#dieta2-ocultar { display: none; }
+
+form {
+    max-width: 420px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+label {
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+input, select {
+    padding: 14px;
+    border: 1px solid #ccc;
+    font-size: 16px; /* evita zoom iOS */
+    font-family: 'Montserrat', sans-serif;
+    color: var(--rosa);
+    background: #fff;
+    width: 100%;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A97B7D' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+button[type="submit"] {
+    padding: 15px;
+    border: none;
+    background: var(--rosa);
+    color: #ffffff;
+    letter-spacing: 2px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    width: 100%;
+}
+button[type="submit"]:hover {
+    background: rgb(145,100,102);
+}
+
+/* ===== REGALO ===== */
+#regalo {
+    position: relative;
+    background-color: var(--fondo-alt);
+    overflow: hidden;
+}
+#regalo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("textura_tela.jpg");
+    background-repeat: repeat;
+    background-size: auto;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 0;
+}
+#regalo > * { position: relative; z-index: 1; }
+
+.regalo {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.regalo p {
+    font-size: clamp(15px, 2.2vw, 17px);
+    margin-bottom: 24px;
+}
+.regalo .iban {
+    font-size: clamp(15px, 2.5vw, 20px);
+    letter-spacing: 1px;
+    font-weight: 500;
+    word-break: break-all; /* en móvil estrecho se puede partir */
+}
+
+/* ===== MENSAJE CONFIRMACIÓN ===== */
+#mensaje-confirmacion {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 500;
+    color: var(--rosa);
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* ===== RESPONSIVE MÓVIL ===== */
+@media (max-width: 700px) {
+
+    :root {
+        --pad-h: 20px;
+        --pad-v: 44px;
+        --nav-h: 56px;
+    }
+
+    /* NAV */
+    nav ul {
+        gap: 12px;
+    }
+    nav ul li a {
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+
+    /* INICIO: columna única, imagen debajo */
+    #inicio {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: calc(var(--nav-h) + var(--pad-v));
+        gap: 28px;
+    }
+    .inicio-texto {
+        padding-top: 0;
+        padding-bottom: 0;
+        text-align: center;
+    }
+    .inicio-imagen {
+        align-self: auto;
+        margin: 0 calc(-1 * var(--pad-h)); /* sangra al borde */
+    }
+    .inicio-imagen img {
+        min-height: 55vw;
+        max-height: 60vw;
+        width: 100%;
+    }
+
+    /* HORARIOS: columna única, sin separador SVG */
+    .horarios-container {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+    .horarios-separador {
+        display: none;
+    }
+    .horarios-fotos {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+    .horarios-fotos img {
+        width: min(140px, 42vw);
+    }
+
+    /* Sin timeline en móvil estrecho */
+    .horarios-texto {
+        padding-left: 0;
+        text-align: center;
+    }
+    .horarios-texto p {
+        text-indent: 0;
+    }
+    .horario-item {
+        margin-bottom: 28px;
+    }
+    .horario-item:last-child {
+        margin-bottom: 0;
+    }
+    .horario-item::before,
+    .horario-item::after {
+        display: none;
+    }
+
+    /* FORMULARIO */
+    form {
+        gap: 14px;
+    }
+}
+
+/* Pantallas muy estrechas (< 380px) */
+@media (max-width: 380px) {
+    nav ul li a {
+        font-size: 9px;
+        letter-spacing: 0.5px;
+    }
+    nav ul {
+        gap: 8px;
+    }
+}
+</style>
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="#inicio">INICIO</a></li>
+        <li><a href="#horarios">HORARIOS</a></li>
+        <li><a href="#confirmacion">CONFIRMACIÓN</a></li>
+        <li><a href="#regalo">REGALO</a></li>
+    </ul>
+</nav>
+
+<!-- INICIO -->
+<section id="inicio">
+    <div class="inicio-texto">
+        <h1>Isabel & Javier</h1>
+        <p>Viernes, 2 de octubre de 2026</p>
+        <p><a href="https://maps.app.goo.gl/hLQHndSmiDJZuFWh8" target="_blank" rel="noopener">Iglesia Nuestra Señora de Guadalupe</a></p>
+        <a href="#confirmacion" class="btn-confirmar">CONFIRMAR</a>
+    </div>
+    <div class="inicio-imagen">
+        <img src="Madrid-Granada.png" alt="Madrid-Granada">
+    </div>
+</section>
+
+<!-- HORARIOS -->
+<section id="horarios">
+    <h2>Horarios</h2>
+    <div class="horarios-container">
+        <div class="horarios-fotos">
+            <img src="Guadalupe.png" alt="Iglesia Nuestra Señora de Guadalupe">
+            <img src="Tenadas.png" alt="Finca Las Tenadas">
+        </div>
+
+        <div class="horarios-texto">
+            <div class="horario-item">
+                <strong>01. Ceremonia · 18:00h</strong>
+                <p><a href="https://maps.app.goo.gl/hLQHndSmiDJZuFWh8" target="_blank" rel="noopener">Iglesia Nuestra Señora de Guadalupe</a></p>
+            </div>
+            <div class="horario-item">
+                <strong>02. Autobús · 19:30h</strong>
+                <p><a href="https://maps.app.goo.gl/xECTYPqQsAZBxH6W7" target="_blank" rel="noopener">Plaza Virgen Guadalupana - Avda. Ramón y Cajal</a></p>
+            </div>
+            <div class="horario-item">
+                <strong>03. Celebración · 20:00h</strong>
+                <p><a href="https://maps.app.goo.gl/cy3o2AY5iEfcCgWF6" target="_blank" rel="noopener">Finca Las Tenadas</a></p>
+            </div>
+            <div class="horario-item">
+                <strong>04. Autobús vuelta · 04:00h</strong>
+                <p><a href="https://maps.app.goo.gl/21mewxPZPfgvVtYv8" target="_blank" rel="noopener">Intercambiador Avda. América</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONFIRMACIÓN -->
+<section id="confirmacion">
+    <h2>Confirmación</h2>
+    <div id="bloque-confirmacion-ocultar-form">
+        <p>
+            Nos encantaría que pudieses acompañarnos en este día.<br>
+            Por favor, completa un formulario por persona.
+        </p>
+        <form id="formulario" action="https://script.google.com/macros/s/AKfycby6--r7sTLVKCN3uREa2ysOJQjtsxNCF9D338f4bFi8V5TzAQa1jkvlitruDYK2F_jHEA/exec" method="POST">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="text" name="apellidos" placeholder="Apellidos" required>
+
+            <div class="form-group">
+                <label for="asistencia">¿Asistirás?</label>
+                <select name="asistencia" id="asistencia" required>
+                    <option value=""></option>
+                    <option>Sí</option>
+                    <option>No</option>
+                </select>
+            </div>
+
+            <div id="campos-extra">
+                <div class="form-group">
+                    <label for="dieta1">
+                        ¿Tienes alguna alergia o necesidad alimentaria?
+                        <span title="Alergias, dieta vegetariana/vegana o embarazo.">ⓘ</span>
+                    </label>
+                    <select name="dieta1" id="dieta1">
+                        <option value=""></option>
+                        <option>Sí</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+                <div id="dieta2-ocultar" class="form-group">
+                    <label for="dieta2">
+                        Alergias o necesidades alimentarias
+                        <span title="Indícanos alergias, dieta vegetariana/vegana o embarazo.">ⓘ</span>
+                    </label>
+                    <input type="text" id="dieta2" name="dieta2">
+                </div>
+
+                <div class="form-group">
+                    <label for="bus_ida">¿Utilizarás el autobús de ida a la finca?</label>
+                    <select name="bus_ida" id="bus_ida">
+                        <option>Sí</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="bus_vuelta">¿Utilizarás el autobús de vuelta de la finca?</label>
+                    <p class="p2">Saldrá a las 04:00 y hará una única parada en Avda. de América</p>
+                    <select name="bus_vuelta" id="bus_vuelta">
+                        <option>Sí</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+                <p style="text-align: justify; margin-top: 4px;">
+                    No preguntamos si vienen niños porque, para esta noche, os damos permiso oficial para buscar canguro y venir a darlo todo!
+                </p>
+            </div>
+
+            <button type="submit">ENVIAR RESPUESTA</button>
+        </form>
+    </div>
+    <div id="mensaje-confirmacion"></div>
+</section>
+
+<!-- REGALO -->
+<section id="regalo">
+    <h2>Regalo</h2>
+    <div class="regalo">
+        <p>
+            El mayor regalo que nos puedes hacer para este día es que nos acompañes, pero si además
+            deseas ayudarnos en esta nueva etapa, puedes hacerlo aquí.
+        </p>
+        <p class="iban">ES22 0081 2718 8900 0812 9024</p>
+        <img src="japan2.png" alt="" style="width:100%; max-width:600px; display:block; margin:30px auto 0;">
+    </div>
+</section>
+
+<script>
+const asistencia = document.getElementById("asistencia");
+const extra = document.getElementById("campos-extra");
+const dieta1 = document.getElementById("dieta1");
+const dieta2 = document.getElementById("dieta2-ocultar");
+const form = document.getElementById("formulario");
+const mensajeConfirmacion = document.getElementById("mensaje-confirmacion");
+
+asistencia.addEventListener("change", function () {
+    if (this.value === "Sí") {
+        extra.style.display = "flex";
+        extra.style.flexDirection = "column";
+        extra.style.gap = "16px";
+    } else {
+        extra.style.display = "none";
+    }
+});
+
+dieta1.addEventListener("change", function () {
+    if (this.value === "Sí") {
+        dieta2.style.display = "flex";
+        dieta2.style.flexDirection = "column";
+        dieta2.style.gap = "6px";
+    } else {
+        dieta2.style.display = "none";
+    }
+});
+
+form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    fetch(form.action, { method: "POST", body: formData })
+        .then(r => r.text())
+        .then(text => {
+            let data;
+            try { data = JSON.parse(text); } catch (err) { throw new Error("Respuesta no válida"); }
+            mensajeConfirmacion.textContent = data.result;
+            mensajeConfirmacion.style.display = "block";
+            document.getElementById("bloque-confirmacion-ocultar-form").style.display = "none";
+            document.getElementById("confirmacion").scrollIntoView({ behavior: "smooth", block: "start" });
+        })
+        .catch(() => {
+            mensajeConfirmacion.textContent = "Error al enviar el formulario. Intenta de nuevo.";
+            mensajeConfirmacion.style.display = "block";
+        });
+});
+</script>
+</body>
+</html>
