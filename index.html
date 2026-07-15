@@ -314,6 +314,47 @@ button[type="submit"]:hover {
     background: rgb(145,100,102);
 }
 
+/* ===== TOOLTIP INFO ===== */
+.info-icon {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    -webkit-tap-highlight-color: transparent;
+}
+.info-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--rosa);
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+    padding: 10px 14px;
+    width: 220px;
+    text-align: center;
+    z-index: 10;
+    border-radius: 2px;
+}
+/* Flechita del bocadillo */
+.info-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--rosa);
+}
+/* Mostrar en PC con hover y en móvil con la clase .activo */
+.info-icon:hover .info-tooltip,
+.info-icon.activo .info-tooltip {
+    display: block;
+}
+
+    
 /* ===== REGALO ===== */
 #regalo {
     position: relative;
@@ -534,7 +575,8 @@ button[type="submit"]:hover {
                 <div class="form-group">
                     <label for="dieta1">
                         ¿Tienes alguna alergia o necesidad alimentaria?
-                        <span title="Alergias, dieta vegetariana/vegana o embarazo.">ⓘ</span>
+                        <span class="info-icon" tabindex="0">ⓘ<span class="info-tooltip">Alergias, dieta vegetariana/vegana o embarazo.</span></span>
+                        /*<span title="Alergias, dieta vegetariana/vegana o embarazo.">ⓘ</span>*/
                     </label>
                     <select name="dieta1" id="dieta1">
                         <option value=""></option>
@@ -654,6 +696,28 @@ form.addEventListener("submit", function (e) {
         });
 });
 
+
+    // Tooltips ⓘ: en móvil se abren/cierran con un toque
+document.querySelectorAll(".info-icon").forEach(function (icono) {
+    icono.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        // Cerrar los demás
+        document.querySelectorAll(".info-icon.activo").forEach(function (otro) {
+            if (otro !== icono) otro.classList.remove("activo");
+        });
+        icono.classList.toggle("activo");
+    });
+});
+
+// Tocar fuera cierra cualquier tooltip abierto
+document.addEventListener("click", function () {
+    document.querySelectorAll(".info-icon.activo").forEach(function (icono) {
+        icono.classList.remove("activo");
+    });
+});
+
+    
 </script>
 </body>
 </html>
